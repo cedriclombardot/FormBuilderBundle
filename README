@@ -1,0 +1,11 @@
+# FormBuilderBundle
+
+FormBuilderBundle is my first Symfony2 Plugin, and it's a concept portage of
+spyFormBuilder2Plugin to ease make a form generator for CMS.
+
+This Bundle will be completly rewrited using Symfony2 Bundles and some other 
+standards.
+
+# TODO
+
+This is the start of project today so specification and documentation
