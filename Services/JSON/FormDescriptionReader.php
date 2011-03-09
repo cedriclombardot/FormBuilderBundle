@@ -69,6 +69,14 @@ class FormDescriptionReader
 	}
 	
 	/**
+	 * Alias of getName for form
+	 */
+	public function getFormName()
+	{
+		return $this->getName();	
+	}
+	
+	/**
 	 * Change the created At 
 	 * @param string $CreatedAt
 	 */
