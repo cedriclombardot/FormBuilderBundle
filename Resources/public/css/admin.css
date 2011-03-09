@@ -1,4 +1,16 @@
-th {
- bacground:#CCC;
- font-weight:bold;
+table.admin_list {
+	width: 100%
+}
+
+table.admin_list tr:nth-child(odd) td {
+	background:#EEE;
+}
+table.admin_list tr td {
+	text-align:center;
+}
+
+table.admin_list th {
+	 background:#CCC;
+	 font-weight:bold;
+	 text-align:center;
 }

@@ -10,9 +10,12 @@
 {% if count_files > 0 %}
 	<p>You've got registred {{ count_files }} forms yet.</p>
 	
-	<table>
+	<table class="admin_list">
 		<thead>
-			<th>FileName</th>
+			<th>Name</th>
+			<th>Description</th>
+			<th>Created At</th>
+			<th>Updated At</th>
 		</thead>
 		<tbody>
 		{% for file in files %}

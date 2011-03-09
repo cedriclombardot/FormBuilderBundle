@@ -8,6 +8,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Symfony\Component\Finder\Finder;
 
+use Lombardot\FormBuilderBundle\Services\JSON\FormDescriptionReader;
+
 class AdminController extends Controller
 {
 
@@ -25,7 +27,8 @@ class AdminController extends Controller
     	       ->in($this->container->getParameter('form_builder.data_dir'));
 
     	foreach ($finder as $file) {
-    	    $files[]=$file->getFilename();
+    		$FormDescriptionReader = new FormDescriptionReader();
+    	    $files[]=$FormDescriptionReader->readJson($file);
     	}
         return array('files' => $files, 'count_files' => sizeof($files));
     }

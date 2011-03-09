@@ -16,9 +16,9 @@ class FormDescriptionReader
 	protected $Id;
 	
 	/**
-	 * @var string $FormName the formName
+	 * @var string $Name the Name
 	 */
-	protected $FormName;
+	protected $Name;
 	
 	/**
 	 * @var string $CreatedAt the creation date
@@ -51,11 +51,11 @@ class FormDescriptionReader
 	
 	/**
 	 * Change the form name
-	 * @param string $FormName
+	 * @param string $Name
 	 */
-	public function setFormName($FormName) 
+	public function setName($Name) 
 	{
-		$this->FormName = $FormName;
+		$this->Name = $Name;
 		return $this;
 	}
 	
@@ -63,9 +63,9 @@ class FormDescriptionReader
 	 * get the setted form name
 	 * @return string the form name
 	 */
-	public function getFormName()
+	public function getName()
 	{
-		return $this->FormName;
+		return $this->Name;
 	}
 	
 	/**
@@ -116,6 +116,16 @@ class FormDescriptionReader
 	}
 	
 	/**
+	 * toString 
+	 * @see getName()
+	 * @return string getName()
+	 */
+	public function __toString()
+	{
+		return (string) $this->getName();
+	}
+	
+	/**
 	 * import the xml
 	 * @param string json the input json
 	 * @return $this
@@ -131,10 +141,18 @@ class FormDescriptionReader
 	}
 	
 	/**
-	 * Save JSON into the defined directory under id.json
+	 * Read JSON file
+	 * @param \Symfony\Component\Finder\SplFileInfo $file
 	 */
-	public function readJson()
+	public function readJson(\Symfony\Component\Finder\SplFileInfo $file)
 	{
+		$fileobj = $file->openFile();
+		$json = null;
+		while ( ! $fileobj->eof()) {
+		    $json.= $fileobj->fgets();
+		}
+		$this->import($json);
+		return $this;
 	}
 }
 ?>

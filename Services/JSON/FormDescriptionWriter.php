@@ -16,9 +16,9 @@ class FormDescriptionWriter
 	protected $Id;
 	
 	/**
-	 * @var string $FormName the formName
+	 * @var string $Name the Name
 	 */
-	protected $FormName;
+	protected $Name;
 	
 	/**
 	 * @var string $CreatedAt the creation date
@@ -51,11 +51,11 @@ class FormDescriptionWriter
 	
 	/**
 	 * Change the form name
-	 * @param string $FormName
+	 * @param string $Name
 	 */
-	public function setFormName($FormName) 
+	public function setName($Name) 
 	{
-		$this->FormName = $FormName;
+		$this->Name = $Name;
 		return $this;
 	}
 	
@@ -63,9 +63,9 @@ class FormDescriptionWriter
 	 * get the setted form name
 	 * @return string the form name
 	 */
-	public function getFormName()
+	public function getName()
 	{
-		return $this->FormName;
+		return $this->Name;
 	}
 	
 	/**
@@ -124,7 +124,7 @@ class FormDescriptionWriter
 		$json = array(
 			'FormBuilder'=>array(
 					'Id'=>$this->getId(),
-					'Name'=>$this->getFormName(),
+					'Name'=>$this->getName(),
 					'CreatedAt'=>$this->getCreatedAt(),
 					'UpdatedAt'=>$this->getUpdatedAt(),
 					'Description'=>$this->getDescription(),
