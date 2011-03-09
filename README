@@ -6,6 +6,30 @@ spyFormBuilder2Plugin to ease make a form generator for CMS.
 This Bundle will be completly rewrited using Symfony2 Bundles and some other 
 standards.
 
+# How to Install
+
+1) Routing
+
+Add this route :
+
+_adminformbuilder:
+    resource: "@FormBuilderBundle/Controller/AdminController.php"
+    type:     annotation
+    prefix:   /form-builder
+
+2) In your AppKernel add
+
+$bundles[] = new Lombardot\FormBuilderBundle\FormBuilderBundle();
+
+3) In autoload register :
+
+'Lombardot'						 => __DIR__.'/../src',
+
+4) Add in config.yml
+
+formbuilder:
+    data_dir:  %kernel.root_dir%/data/FormBuilder/ # To configure where we need to save json that describe form
+    
 # TODO
 
 This is the start of project today so specification and documentation

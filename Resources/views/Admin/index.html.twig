@@ -1,0 +1,28 @@
+{% extends 'FormBuilderBundle::layout.html.twig' %}
+
+{% block title %}Form Builder list of elements{% endblock %}
+
+{% block content %}
+
+<h1>Form Builder list of elements</h1>
+<p>Here is the list of forms that you could easy manage</p>
+
+{% if count_files > 0 %}
+	<p>You've got registred {{ count_files }} forms yet.</p>
+	
+	<table>
+		<thead>
+			<th>FileName</th>
+		</thead>
+		<tbody>
+		{% for file in files %}
+		 	{% include "FormBuilderBundle:Admin:row_file.html.twig" %}
+		{% endfor %}
+		</tbody>
+	</table>
+	
+{% else %}
+	You've got no form for the moment
+{% endif %}
+
+{% endblock %}
