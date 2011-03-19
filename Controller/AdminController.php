@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Symfony\Component\Finder\Finder;
 
-use Lombardot\FormBuilderBundle\Services\JSON\FormDescriptionReader;
+use Lombardot\FormBuilderBundle\Services\JSON\FormDescription;
 
 use Symfony\Component\Finder\SplFileInfo;
 
@@ -29,15 +29,15 @@ class AdminController extends Controller
     	       ->in($this->container->getParameter('form_builder.data_dir'));
 
     	foreach ($finder as $file) {
-    		$FormDescriptionReader = new FormDescriptionReader();
-    	    $files[]=$FormDescriptionReader->readJson($file);
+    		$FormDescription = new FormDescription();
+    	    $files[]=$FormDescription->readJson($file);
     	}
         return array('files' => $files, 'count_files' => sizeof($files));
     }
     
     
  	/**
-     * @extra:Route("/edit/{id}", name="_adminformbuilder_edit")
+     * @extra:Route("/admin/edit/{id}", name="_adminformbuilder_edit")
      * @extra:Template()
      */
     public function editAction()
@@ -50,11 +50,19 @@ class AdminController extends Controller
 
     	$SplFileInfo = new SplFileInfo($filePath,$this->get('request')->get('id').'.json',$this->get('request')->get('id').'.json');
     	
-        $FormDescriptionReader = new FormDescriptionReader();
-    	$file = $FormDescriptionReader->readJson($SplFileInfo);
+        $FormDescription = new FormDescription($this->container);
+    	$file = $FormDescription->readJson($SplFileInfo);
     	
     	$form = FormBuilderForm::create($this->get('form.context'), 'formbuilder');
     	$form->setData($file);
+    	
+    	if($this->container->get('request')->get($form->getName())) {
+    		$form->bind($this->container->get('request'));
+    		if($form->isValid()) {
+    			$form->save();
+    			return new \Symfony\Component\HttpFoundation\RedirectResponse($this->container->get('router')->generate('_adminformbuilder_edit',array('id'=> $FormDescription->getId())));
+    		}
+    	}    	
     	
     	return array('file' => $file, 'form' => $form);
     }

@@ -39,12 +39,18 @@ class FormBuilderExtension extends Extension
     {
         return __DIR__.'/../Resources/config/schema';
     }
-
+	
+    /**
+     * @see Extension::getNamespace()
+     */
     public function getNamespace()
     {
         return 'http://symfony.com/schema/dic/symfony_extra';
     }
     
+    /**
+     * @see Extension::getAlias()
+     */
 	public function getAlias()
     {
         return 'form_builder';
