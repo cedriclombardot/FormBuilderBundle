@@ -3,6 +3,7 @@
 namespace Lombardot\FormBuilderBundle\Controller;
 
 use Lombardot\FormBuilderBundle\Form\FormBuilderForm;
+use Lombardot\FormBuilderBundle\Form\FormBuilderFieldForm;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -10,7 +11,7 @@ use Symfony\Component\Finder\Finder;
 
 use Lombardot\FormBuilderBundle\Services\JSON\FormDescription;
 
-use Symfony\Component\Finder\SplFileInfo;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class AdminController extends Controller
 {
@@ -42,16 +43,8 @@ class AdminController extends Controller
      */
     public function editAction()
     {
-    	$filePath = $this->container->getParameter('form_builder.data_dir').$this->get('request')->get('id').'.json';
-    	
-    	if(!file_exists($filePath)) {
-    		throw new \Exception(sprintf('The file %s does not exist',$filePath));
-    	}
-
-    	$SplFileInfo = new SplFileInfo($filePath,$this->get('request')->get('id').'.json',$this->get('request')->get('id').'.json');
-    	
-        $FormDescription = new FormDescription($this->container);
-    	$file = $FormDescription->readJson($SplFileInfo);
+        $FormDescription = FormDescription::getForm($this->get('request')->get('id'), $this->container);
+    	$file = $FormDescription->readJson();
     	
     	$form = FormBuilderForm::create($this->get('form.context'), 'formbuilder');
     	$form->setData($file);
@@ -60,10 +53,44 @@ class AdminController extends Controller
     		$form->bind($this->container->get('request'));
     		if($form->isValid()) {
     			$form->save();
-    			return new \Symfony\Component\HttpFoundation\RedirectResponse($this->container->get('router')->generate('_adminformbuilder_edit',array('id'=> $FormDescription->getId())));
+    			return new RedirectResponse($this->container
+    						->get('router')
+    						->generate('_adminformbuilder_edit',
+    									array('id'=> $FormDescription->getId())
+    								)
+    						);
     		}
     	}    	
     	
     	return array('file' => $file, 'form' => $form);
     }
+    
+    /**
+     * Action to add a fiel in a specific form
+     * @extra:Route("/admin/{id}/add_field", name="_adminformbuilder_add_field")
+     * @extra:Template()
+     */
+    public function addFieldAction()
+    {
+    	$FormDescription = FormDescription::getForm($this->get('request')->get('id'), $this->container);
+    	$form = FormBuilderFieldForm::create($this->get('form.context'), 'formbuilder_field');
+    	$file = $FormDescription->readJson();
+    	
+    	if($this->container->get('request')->get($form->getName())) {
+    		$form->bind($this->container->get('request'));
+    		if($form->isValid()) {
+    			$form->save();
+    			return new RedirectResponse($this->container
+    						->get('router')
+    						->generate('_adminformbuilder_edit',
+    									array('id'=> $FormDescription->getId())
+    								)
+    						);
+    		}
+    	}
+    	return array('file' => $file, 'form' => $form);
+    }
+    
+    
+    
 }
