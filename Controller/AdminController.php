@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Finder\Finder;
 
 use Lombardot\FormBuilderBundle\Services\JSON\FormDescription;
+use Lombardot\FormBuilderBundle\Services\JSON\FieldDescription;
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
@@ -66,7 +67,7 @@ class AdminController extends Controller
     }
     
     /**
-     * Action to add a fiel in a specific form
+     * Action to add a field in a specific form
      * @extra:Route("/admin/{id}/add_field", name="_adminformbuilder_add_field")
      * @extra:Template()
      */
@@ -75,6 +76,9 @@ class AdminController extends Controller
     	$FormDescription = FormDescription::getForm($this->get('request')->get('id'), $this->container);
     	$form = FormBuilderFieldForm::create($this->get('form.context'), 'formbuilder_field');
     	$file = $FormDescription->readJson();
+    	
+    	$field = $FormDescription->createANewField();
+    	$form->setData($field);
     	
     	if($this->container->get('request')->get($form->getName())) {
     		$form->bind($this->container->get('request'));
@@ -91,6 +95,13 @@ class AdminController extends Controller
     	return array('file' => $file, 'form' => $form);
     }
     
-    
-    
+     /**
+     * Action to edit a field in a specific form
+     * @extra:Route("/admin/{id}/edit_field/{field}", name="_adminformbuilder_edit_field")
+     * @extra:Template()
+     */
+    public function editFieldAction()
+    {
+    	
+    }
 }
