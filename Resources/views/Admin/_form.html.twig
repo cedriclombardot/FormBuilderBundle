@@ -1,0 +1,15 @@
+<form method="post" {{ form_enctype(form) }} action="{{ path('_adminformbuilder_update') }}" >
+	{{ form_field(form) }}
+	
+	<input type="submit" action="save" />
+</form>
+
+<div class="actions">
+	<ul class="actions">
+		<li>
+			<a href="{{ path('_adminformbuilder') }}" title="Return to list"> 
+				List
+			</a>
+		</li>
+	</ul>
+</div>

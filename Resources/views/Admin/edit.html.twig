@@ -1,0 +1,12 @@
+{% extends 'LombardotFormBuilderBundle::layout.html.twig' %}
+
+{% block title %}Edit form {{ FormBuilderForm.FormName }}{% endblock %}
+
+{% block content %}
+
+<h1>Edit form {{ FormBuilderForm.FormName }}</h1>
+<p>You can edit here your form or add fields</p>
+
+{% include "LombardotFormBuilderBundle:Admin:_form.html.twig" %}
+
+{% endblock %}

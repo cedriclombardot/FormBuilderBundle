@@ -1,0 +1,16 @@
+<tr>
+	<td>{{ FormBuilderForm.Id }}</td>
+	<td>{{ FormBuilderForm.FormName }}</td>
+	<td>{{ FormBuilderForm.Description }}</td>
+	<td>{# FormBuilderForm.CreatedAt #}</td>
+	<td>{# FormBuilderForm.UpdatedAt #}</td>
+	<td>
+		<ul class="sf_admin_actions">
+			<li class="sf_admin_action_edit">
+				<a href="{{ path('_adminformbuilder_edit', { 'id': FormBuilderForm.Id }) }}" title="Edit {{ FormBuilderForm.FormName }} form"> 
+					Edit
+				</a>
+			</li>
+		</ul>
+	</td>
+</tr>
