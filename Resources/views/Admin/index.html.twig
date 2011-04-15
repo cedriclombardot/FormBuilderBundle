@@ -1,4 +1,4 @@
-{% extends 'FormBuilderBundle::layout.html.twig' %}
+{% extends 'LombardotFormBuilderBundle::layout.html.twig' %}
 
 {% block title %}Form Builder list of elements{% endblock %}
 
@@ -7,8 +7,8 @@
 <h1>Form Builder list of elements</h1>
 <p>Here is the list of forms that you could easy manage</p>
 
-{% if count_files > 0 %}
-	<p>You've got registred {{ count_files }} forms yet.</p>
+{% if count > 0 %}
+	<p>You've got registred {{ count }} forms yet.</p>
 	
 	<table class="admin_list">
 		<thead>
@@ -20,8 +20,8 @@
 			<th>Actions</th>
 		</thead>
 		<tbody>
-		{% for file in files %}
-		 	{% include "FormBuilderBundle:Admin:row_file.html.twig" %}
+		{% for FormBuilderForm in FormBuilderForms %}
+		 	{% include "LombardotFormBuilderBundle:Admin:_row_file.html.twig" %}
 		{% endfor %}
 		</tbody>
 	</table>
@@ -29,5 +29,13 @@
 {% else %}
 	You've got no form for the moment
 {% endif %}
-
+<div class="actions">
+	<ul class="actions_list">
+		<li>
+			<a href="{{ path('_adminformbuilder_new') }}" title="New form"> 
+				New
+			</a>
+		</li>
+	</ul>
+</div>
 {% endblock %}
