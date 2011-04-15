@@ -1,0 +1,38 @@
+{% extends 'LombardotFormBuilderBundle::layout.html.twig' %}
+
+{% block title %}List of fields for the form{% endblock %}
+
+{% block content %}
+
+<h1>List of fields for the form</h1>
+<p>Here is the list of fields created in the form</p>
+
+{% if count > 0 %}
+	<p>You've got registred {{ count }} fields yet.</p>
+	
+	<table class="admin_list">
+		<thead>
+			<th>Id</th>
+			<th>Name</th>
+			<th>Description</th>
+			<th>Created At</th>
+			<th>Updated At</th>
+			<th>Actions</th>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
+	
+{% else %}
+	You've got no fields for the moment
+{% endif %}
+<div class="actions">
+	<ul class="actions_list">
+		<li>
+			<a href="{{ path('_adminformbuilder_new') }}" title="New field"> 
+				New field
+			</a>
+		</li>
+	</ul>
+</div>
+{% endblock %}
