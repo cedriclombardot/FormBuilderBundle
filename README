@@ -13,7 +13,7 @@ standards.
 Add this route :
 
 _adminformbuilder:
-    resource: "@FormBuilderBundle/Controller/AdminController.php"
+    resource: "@LombardotFormBuilderBundle/Controller"
     type:     annotation
     prefix:   /form-builder
 
@@ -25,11 +25,6 @@ $bundles[] = new Lombardot\FormBuilderBundle\FormBuilderBundle();
 
 'Lombardot'						 => __DIR__.'/../src',
 
-4) Add in config.yml
-
-formbuilder:
-    data_dir:  %kernel.root_dir%/data/FormBuilder/ # To configure where we need to save json that describe form
-    
 # TODO
 
 This is the start of project today so specification and documentation
