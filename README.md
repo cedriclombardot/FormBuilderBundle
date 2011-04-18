@@ -12,18 +12,18 @@ standards.
 
 Add this route :
 
-_adminformbuilder:
-    resource: "@LombardotFormBuilderBundle/Controller"
-    type:     annotation
-    prefix:   /form-builder
+	_adminformbuilder:
+	    resource: "@LombardotFormBuilderBundle/Controller"
+	    type:     annotation
+	    prefix:   /form-builder
 
 2) In your AppKernel add
 
-$bundles[] = new Lombardot\FormBuilderBundle\FormBuilderBundle();
+	$bundles[] = new Lombardot\FormBuilderBundle\FormBuilderBundle();
 
 3) In autoload register :
 
-'Lombardot'						 => __DIR__.'/../src',
+	'Lombardot'						 => __DIR__.'/../src',
 
 # TODO
 
