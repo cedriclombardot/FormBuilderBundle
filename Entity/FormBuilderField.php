@@ -26,10 +26,9 @@ class FormBuilderField
     private $label = null;
 	
     /**
-     * @orm:Column(type="integer")
-     * @orm:OneToOne(targetEntity="FormBuilderType", mappedBy="type")
+     * @orm:ManyToOne(targetEntity="FormBuilderType")
      */
-    private $type_id = null;
+    private $type = null;
 
 
     /**
@@ -83,22 +82,22 @@ class FormBuilderField
     }
 
     /**
-     * Set type_id
+     * Set type
      *
-     * @param integer $typeId
+     * @param Lombardot\FormBuilderBundle\Entity\FormBuilderType $type
      */
-    public function setTypeId($typeId)
+    public function setType(\Lombardot\FormBuilderBundle\Entity\FormBuilderType $type)
     {
-        $this->type_id = $typeId;
+        $this->type = $type;
     }
 
     /**
-     * Get type_id
+     * Get type
      *
-     * @return integer $typeId
+     * @return Lombardot\FormBuilderBundle\Entity\FormBuilderType $type
      */
-    public function getTypeId()
+    public function getType()
     {
-        return $this->type_id;
+        return $this->type;
     }
 }

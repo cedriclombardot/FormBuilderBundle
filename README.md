@@ -8,7 +8,7 @@ standards.
 
 # How to Install
 
-1) Routing
+## 1) Routing
 
 Add this route :
 
@@ -17,13 +17,37 @@ Add this route :
 	    type:     annotation
 	    prefix:   /form-builder
 
-2) In your AppKernel add
+## 2) In your AppKernel add
 
 	$bundles[] = new Lombardot\FormBuilderBundle\FormBuilderBundle();
 
-3) In autoload register :
+## 3) In autoload register :
 
 	'Lombardot'						 => __DIR__.'/../src',
+
+## 4)  Configure doctrine entity generation
+
+In config.yml :
+
+	# Doctrine Configuration
+	doctrine:
+	 
+	    orm:
+	        entity_managers:
+	            default:
+	                mappings:
+	                    LombardotFormBuilderBundle: ~
+
+And run :
+	php app/console doctrine:generate:entities LombardotFormBuilderBundle
+	php app/console php app/console doctrine:schema:update --force 
+		                    
+## 5) Routing
+	                                        
+_adminformbuilder:
+    resource: "@LombardotFormBuilderBundle/Controller"
+    type:     annotation
+    prefix:   /form-builder
 
 # TODO
 
